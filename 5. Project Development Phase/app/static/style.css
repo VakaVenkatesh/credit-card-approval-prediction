@@ -1,0 +1,462 @@
+/* static/style.css */
+:root {
+  --bg: #0e1420;
+  --bg-raised: #141b2b;
+  --card-bg: #161d2e;
+  --text: #e8e6de;
+  --muted: #8b93a6;
+  --border: #262f45;
+  --brass: #c9a15c;
+  --brass-dim: #8a7442;
+  --clear: #4f9d7c;
+  --review: #c9a15c;
+  --decline: #b3564a;
+  --font-display: "Fraunces", serif;
+  --font-body: "Inter", sans-serif;
+  --font-mono: "IBM Plex Mono", monospace;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  background: var(--bg);
+  background-image:
+    linear-gradient(180deg, rgba(201, 161, 92, 0.04), transparent 320px);
+  color: var(--text);
+  font-family: var(--font-body);
+  margin: 0;
+  line-height: 1.55;
+}
+
+a {
+  color: var(--brass);
+}
+
+/* --- Nav --- */
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1.1rem 2.5rem;
+  border-bottom: 1px solid var(--border);
+  background: var(--bg-raised);
+}
+
+.nav-brand {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  font-family: var(--font-display);
+  font-weight: 600;
+  letter-spacing: 0.02em;
+}
+
+.nav-mark {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  border: 1px solid var(--brass-dim);
+  color: var(--brass);
+  padding: 0.2rem 0.4rem;
+  border-radius: 3px;
+  letter-spacing: 0.1em;
+}
+
+.nav-links a {
+  color: var(--muted);
+  text-decoration: none;
+  margin-left: 1.75rem;
+  font-size: 0.92rem;
+  transition: color 0.15s ease;
+}
+
+.nav-links a:hover {
+  color: var(--text);
+}
+
+/* --- Layout --- */
+.content {
+  max-width: 880px;
+  margin: 0 auto;
+  padding: 2.5rem 1.5rem 4rem;
+}
+
+.footer {
+  text-align: center;
+  color: var(--muted);
+  font-size: 0.82rem;
+  padding: 2rem 1rem 3rem;
+  border-top: 1px solid var(--border);
+  margin-top: 2rem;
+}
+
+.eyebrow {
+  font-family: var(--font-mono);
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  font-size: 0.75rem;
+  color: var(--brass);
+  margin: 0 0 0.75rem;
+}
+
+/* --- Hero --- */
+.hero {
+  padding: 2.5rem 0 2rem;
+  border-bottom: 1px solid var(--border);
+}
+
+.hero h1 {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 2.35rem;
+  line-height: 1.18;
+  margin: 0 0 1.1rem;
+  max-width: 640px;
+}
+
+.hero-sub {
+  color: var(--muted);
+  max-width: 560px;
+  font-size: 1.02rem;
+  margin-bottom: 1.75rem;
+}
+
+.cta-button,
+.submit-button {
+  display: inline-block;
+  background: var(--brass);
+  color: #14150f;
+  font-weight: 600;
+  padding: 0.75rem 1.5rem;
+  border-radius: 4px;
+  text-decoration: none;
+  border: none;
+  font-size: 0.95rem;
+  cursor: pointer;
+  font-family: var(--font-body);
+  transition: transform 0.12s ease, background 0.15s ease;
+}
+
+.cta-button:hover,
+.submit-button:hover {
+  background: #d8b06e;
+  transform: translateY(-1px);
+}
+
+/* --- Ledger strip (stat tape on home page) --- */
+.ledger-strip {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1px;
+  background: var(--border);
+  margin: 2rem 0;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  overflow: hidden;
+}
+
+.ledger-item {
+  background: var(--card-bg);
+  padding: 1.1rem 1rem;
+  text-align: center;
+}
+
+.ledger-value {
+  display: block;
+  font-family: var(--font-mono);
+  font-size: 1.5rem;
+  color: var(--brass);
+}
+
+.ledger-label {
+  display: block;
+  font-size: 0.72rem;
+  color: var(--muted);
+  margin-top: 0.35rem;
+  line-height: 1.3;
+}
+
+/* --- How it works --- */
+.how-it-works {
+  padding: 2.5rem 0;
+  border-bottom: 1px solid var(--border);
+}
+
+.how-it-works h2,
+.honesty-panel h2 {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 1.4rem;
+  margin-bottom: 1.5rem;
+}
+
+.steps {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.5rem;
+}
+
+.step {
+  border-left: 2px solid var(--brass-dim);
+  padding-left: 1rem;
+}
+
+.step-tag {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--brass);
+}
+
+.step h3 {
+  font-family: var(--font-body);
+  font-size: 1.02rem;
+  margin: 0.4rem 0 0.5rem;
+}
+
+.step p {
+  color: var(--muted);
+  font-size: 0.9rem;
+  margin: 0;
+}
+
+.honesty-panel {
+  padding: 2.5rem 0 1rem;
+}
+
+.honesty-panel p {
+  color: var(--muted);
+  font-size: 0.96rem;
+}
+
+/* --- Form --- */
+.form-section h1 {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 1.9rem;
+  margin: 0.25rem 0 0.75rem;
+}
+
+.form-intro {
+  color: var(--muted);
+  font-size: 0.92rem;
+  margin-bottom: 2rem;
+  max-width: 560px;
+}
+
+fieldset {
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 1.25rem 1.5rem 1.5rem;
+  margin-bottom: 1.5rem;
+}
+
+legend {
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--brass);
+  padding: 0 0.5rem;
+}
+
+.ledger-mark {
+  color: var(--brass);
+}
+
+.form-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1.1rem 1.5rem;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+}
+
+.form-group label {
+  font-size: 0.82rem;
+  color: var(--muted);
+  margin-bottom: 0.4rem;
+}
+
+.form-group input,
+.form-group select {
+  background: var(--bg-raised);
+  border: 1px solid var(--border);
+  color: var(--text);
+  padding: 0.6rem 0.7rem;
+  border-radius: 4px;
+  font-family: var(--font-body);
+  font-size: 0.92rem;
+}
+
+.form-group input:focus,
+.form-group select:focus {
+  outline: 2px solid var(--brass-dim);
+  outline-offset: 1px;
+}
+
+.field-hint {
+  font-size: 0.75rem;
+  color: var(--brass-dim);
+  margin-top: 0.3rem;
+}
+
+.checkbox-group {
+  flex-direction: row;
+  gap: 1.75rem;
+  flex-wrap: wrap;
+}
+
+.checkbox-group label {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  color: var(--text);
+  font-size: 0.9rem;
+}
+
+.submit-button {
+  margin-top: 0.5rem;
+  width: 100%;
+}
+
+/* --- Result page --- */
+.result-card {
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 2rem;
+  margin-bottom: 1.5rem;
+  border-top: 3px solid var(--muted);
+}
+
+.result-card.result-clear,
+.result-card.result-low {
+  border-top-color: var(--clear);
+}
+
+.result-card.result-medium,
+.result-card.result-review {
+  border-top-color: var(--review);
+}
+
+.result-card.result-decline,
+.result-card.result-high {
+  border-top-color: var(--decline);
+}
+
+.result-card.result-error {
+  border-top-color: var(--decline);
+}
+
+.result-tag {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--muted);
+}
+
+.result-card h1 {
+  font-family: var(--font-display);
+  font-size: 1.6rem;
+  margin: 0.5rem 0 0.75rem;
+}
+
+.result-card > p {
+  color: var(--muted);
+  font-size: 0.94rem;
+}
+
+.gauge {
+  margin: 1.5rem 0;
+}
+
+.gauge-track {
+  position: relative;
+  height: 10px;
+  background: var(--bg-raised);
+  border-radius: 5px;
+  overflow: visible;
+  border: 1px solid var(--border);
+}
+
+.gauge-fill {
+  height: 100%;
+  border-radius: 5px 0 0 5px;
+  transition: width 0.4s ease;
+}
+
+.gauge-fill.gauge-low {
+  background: var(--clear);
+}
+
+.gauge-fill.gauge-medium {
+  background: var(--review);
+}
+
+.gauge-fill.gauge-high {
+  background: var(--decline);
+}
+
+.gauge-threshold {
+  position: absolute;
+  top: -4px;
+  bottom: -4px;
+  width: 2px;
+  background: var(--text);
+}
+
+.gauge-labels {
+  display: flex;
+  justify-content: space-between;
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  color: var(--muted);
+  margin-top: 0.5rem;
+}
+
+.reason-heading {
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--muted);
+  margin: 1.5rem 0 0.5rem;
+}
+
+.reason-list {
+  margin: 0;
+  padding-left: 1.2rem;
+  font-size: 0.94rem;
+}
+
+.reason-list li {
+  margin-bottom: 0.4rem;
+}
+
+.reason-list.soft li {
+  color: var(--muted);
+}
+
+.disclaimer {
+  color: var(--muted);
+  font-size: 0.85rem;
+  max-width: 560px;
+}
+
+/* --- Responsive --- */
+@media (max-width: 720px) {
+  .ledger-strip,
+  .steps,
+  .form-grid {
+    grid-template-columns: 1fr;
+  }
+  .hero h1 {
+    font-size: 1.8rem;
+  }
+}

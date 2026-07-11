@@ -1,0 +1,131 @@
+<!-- templates/predict.html -->
+{% extends "base.html" %} {% block title %}New Application — Credit Risk Desk{% endblock %} {% block content %}
+
+<section class="form-section">
+  <p class="eyebrow">Applicant intake</p>
+  <h1>Applicant Details</h1>
+  <p class="form-intro">
+    Fields marked with the ledger mark (₹) affect the eligibility gate
+    directly — an income of 0 or below will be declined before any model
+    score is computed.
+  </p>
+
+  <form action="{{ url_for('predict') }}" method="POST" class="prediction-form">
+    <fieldset>
+      <legend>Identity &amp; household</legend>
+      <div class="form-grid">
+        <div class="form-group">
+          <label for="gender">Gender</label>
+          <select name="gender" id="gender" required>
+            <option value="F">Female</option>
+            <option value="M">Male</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="age">Age</label>
+          <input type="number" name="age" id="age" min="1" max="120" required />
+        </div>
+
+        <div class="form-group">
+          <label for="family_status">Family Status</label>
+          <select name="family_status" id="family_status" required>
+            {% for opt in family_statuses %}
+            <option value="{{ opt }}">{{ opt }}</option>
+            {% endfor %}
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="family_members">Family Members</label>
+          <input type="number" name="family_members" id="family_members" min="1" value="1" required />
+        </div>
+
+        <div class="form-group">
+          <label for="children">Number of Children</label>
+          <input type="number" name="children" id="children" min="0" value="0" required />
+        </div>
+
+        <div class="form-group">
+          <label for="housing_type">Housing Type</label>
+          <select name="housing_type" id="housing_type" required>
+            {% for opt in housing_types %}
+            <option value="{{ opt }}">{{ opt }}</option>
+            {% endfor %}
+          </select>
+        </div>
+      </div>
+    </fieldset>
+
+    <fieldset>
+      <legend>Financial standing <span class="ledger-mark">₹</span></legend>
+      <div class="form-grid">
+        <div class="form-group">
+          <label for="income">Annual Income (₹)</label>
+          <input type="number" name="income" id="income" min="0" step="1000" required />
+          <span class="field-hint">Must be greater than 0 to pass the eligibility gate.</span>
+        </div>
+
+        <div class="form-group">
+          <label for="income_type">Income Type</label>
+          <select name="income_type" id="income_type" required>
+            {% for opt in income_types %}
+            <option value="{{ opt }}">{{ opt }}</option>
+            {% endfor %}
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="occupation">Occupation</label>
+          <select name="occupation" id="occupation" required>
+            {% for opt in occupation_types %}
+            <option value="{{ opt }}">{{ opt }}</option>
+            {% endfor %}
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="years_employed">Years Employed (0 if not employed)</label>
+          <input type="number" name="years_employed" id="years_employed" min="0" step="0.1" value="0" required />
+        </div>
+
+        <div class="form-group">
+          <label for="own_car">Owns a Car?</label>
+          <select name="own_car" id="own_car" required>
+            <option value="N">No</option>
+            <option value="Y">Yes</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="own_realty">Owns Property?</label>
+          <select name="own_realty" id="own_realty" required>
+            <option value="Y">Yes</option>
+            <option value="N">No</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="education">Education Level</label>
+          <select name="education" id="education" required>
+            {% for opt in education_types %}
+            <option value="{{ opt }}">{{ opt }}</option>
+            {% endfor %}
+          </select>
+        </div>
+      </div>
+    </fieldset>
+
+    <fieldset>
+      <legend>Contact details on file</legend>
+      <div class="form-group checkbox-group">
+        <label><input type="checkbox" name="work_phone" value="1" /> Work Phone</label>
+        <label><input type="checkbox" name="phone" value="1" /> Phone</label>
+        <label><input type="checkbox" name="email" value="1" /> Email</label>
+      </div>
+    </fieldset>
+
+    <button type="submit" class="submit-button">Run Risk Screening</button>
+  </form>
+</section>
+{% endblock %}

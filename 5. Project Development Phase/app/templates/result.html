@@ -1,0 +1,76 @@
+<!-- templates/result.html -->
+{% extends "base.html" %} {% block title %}Screening Result — Credit Risk Desk{% endblock %} {% block content %}
+
+<section class="result-section">
+
+  {% if form_errors %}
+  <div class="result-card result-error">
+    <h1>Check the form</h1>
+    <ul class="reason-list">
+      {% for err in form_errors %}
+      <li>{{ err }}</li>
+      {% endfor %}
+    </ul>
+  </div>
+  <a class="cta-button" href="{{ url_for('predict_form') }}">Back to Application</a>
+
+  {% elif source == "rules" %}
+  <div class="result-card result-decline">
+    <span class="result-tag">Eligibility gate</span>
+    <h1>⛔ Declined at eligibility gate</h1>
+    <p>This application was declined before any ML score was computed — the rules below are deterministic, not statistical.</p>
+    <ul class="reason-list">
+      {% for reason in reasons %}
+      <li>{{ reason }}</li>
+      {% endfor %}
+    </ul>
+  </div>
+  <a class="cta-button" href="{{ url_for('predict_form') }}">Screen Another Applicant</a>
+
+  {% else %}
+  <div class="result-card result-{{ band }}">
+    <span class="result-tag">ML risk score</span>
+    <h1>
+      {% if decision == "review" %}⚠ Flag for Manual Review{% else %}✓ Clear — No Elevated Risk Flagged{% endif %}
+    </h1>
+
+    <div class="gauge">
+      <div class="gauge-track">
+        <div class="gauge-fill gauge-{{ band }}" style="width: {{ probability }}%;"></div>
+        <div class="gauge-threshold" style="left: {{ threshold }}%;"></div>
+      </div>
+      <div class="gauge-labels">
+        <span>Estimated risk: {{ probability }}%</span>
+        <span>Review threshold: {{ threshold }}%</span>
+      </div>
+    </div>
+
+    {% if reasons %}
+    <h2 class="reason-heading">What's driving this score</h2>
+    <ul class="reason-list">
+      {% for reason in reasons %}
+      <li>{{ reason }}</li>
+      {% endfor %}
+    </ul>
+    {% endif %}
+
+    {% if soft_flags %}
+    <h2 class="reason-heading">Worth a second look</h2>
+    <ul class="reason-list soft">
+      {% for flag in soft_flags %}
+      <li>{{ flag }}</li>
+      {% endfor %}
+    </ul>
+    {% endif %}
+  </div>
+
+  <p class="disclaimer">
+    This is a statistical estimate from historical data, not a final credit
+    decision. It is designed to prioritize applications for human review —
+    actual approval depends on further review and lender policy.
+  </p>
+
+  <a class="cta-button" href="{{ url_for('predict_form') }}">Screen Another Applicant</a>
+  {% endif %}
+</section>
+{% endblock %}

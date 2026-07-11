@@ -1,0 +1,85 @@
+<!-- templates/home.html -->
+{% extends "base.html" %} {% block title %}Credit Risk Desk — Overview{% endblock %} {% block content %}
+
+<section class="hero">
+  <p class="eyebrow">Applicant risk triage</p>
+  <h1>A second pair of eyes for every application<br />— never the only one.</h1>
+  <p class="hero-sub">
+    A hard eligibility gate catches what a statistical model shouldn't be
+    guessing at, and a tuned XGBoost model ranks the rest by risk — so
+    analysts review a small, concentrated slice of applications instead of
+    every single one.
+  </p>
+  <a class="cta-button" href="{{ url_for('predict_form') }}">Screen an Applicant</a>
+</section>
+
+<section class="ledger-strip">
+  <div class="ledger-item">
+    <span class="ledger-value">{{ (metrics.cv_roc_auc_mean * 100) | round(1) }}%</span>
+    <span class="ledger-label">ROC-AUC (5-fold CV)</span>
+  </div>
+  <div class="ledger-item">
+    <span class="ledger-value">{{ (metrics.decision_threshold * 100) | round(1) }}%</span>
+    <span class="ledger-label">Tuned decision threshold</span>
+  </div>
+  <div class="ledger-item">
+    <span class="ledger-value">{{ (metrics.validation_flag_rate * 100) | round(1) }}%</span>
+    <span class="ledger-label">Of applicants flagged for review</span>
+  </div>
+  <div class="ledger-item">
+    <span class="ledger-value">{{ (metrics.positive_rate * 100) | round(2) }}%</span>
+    <span class="ledger-label">True high-risk rate in training data</span>
+  </div>
+</section>
+
+<section class="how-it-works">
+  <h2>How a screening decision is made</h2>
+  <div class="steps">
+    <div class="step">
+      <span class="step-tag">Gate</span>
+      <h3>Hard eligibility rules</h3>
+      <p>
+        Zero or negative income, implausible age, or employment history that
+        doesn't add up gets declined outright — deterministically, without
+        asking the model to guess at data it has never seen. The training set
+        has no applicant with income below ₹26,100; a submission of ₹0 is not
+        something the model has an informed opinion about.
+      </p>
+    </div>
+    <div class="step">
+      <span class="step-tag">Score</span>
+      <h3>ML risk ranking</h3>
+      <p>
+        Applicants who clear the gate are scored by an XGBoost model trained
+        on 36,457 real applicants and their repayment history, using a
+        decision threshold tuned for this specific problem rather than a
+        default 0.5 cutoff.
+      </p>
+    </div>
+    <div class="step">
+      <span class="step-tag">Explain</span>
+      <h3>Reason codes</h3>
+      <p>
+        Every score comes with the top factors that pushed it up or down
+        (via SHAP), so a flagged application is never just a bare
+        percentage — an analyst can see why.
+      </p>
+    </div>
+  </div>
+</section>
+
+<section class="honesty-panel">
+  <h2>What this model can and can't do</h2>
+  <p>
+    Only 616 of 36,457 applicants in the training data are high-risk — that
+    scarcity puts a real ceiling on how discriminative any model can be here,
+    regardless of tuning. This system is built and evaluated around that
+    constraint rather than around it: the decision threshold is chosen to
+    concentrate manual review on a small slice of applicants while catching
+    a meaningfully larger share of true high-risk cases than a coin flip
+    would. It is a triage aid for prioritizing human review, not an
+    automatic approval or rejection system.
+  </p>
+</section>
+
+{% endblock %}
