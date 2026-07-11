@@ -1,0 +1,88 @@
+{
+  "comparison_table": [
+    {
+      "Model": "Logistic Regression",
+      "Accuracy": 0.593,
+      "ROC_AUC": 0.58,
+      "F1_high_risk": 0.041
+    },
+    {
+      "Model": "Decision Tree",
+      "Accuracy": 0.826,
+      "ROC_AUC": 0.588,
+      "F1_high_risk": 0.055
+    },
+    {
+      "Model": "Random Forest",
+      "Accuracy": 0.95,
+      "ROC_AUC": 0.68,
+      "F1_high_risk": 0.158
+    },
+    {
+      "Model": "XGBoost (untuned)",
+      "Accuracy": 0.873,
+      "ROC_AUC": 0.71,
+      "F1_high_risk": 0.112
+    },
+    {
+      "Model": "XGBoost (tuned, threshold=0.5)",
+      "Accuracy": 0.951,
+      "ROC_AUC": 0.714,
+      "F1_high_risk": 0.235
+    },
+    {
+      "Model": "XGBoost (tuned, threshold=0.65)",
+      "Accuracy": 0.963,
+      "ROC_AUC": 0.714,
+      "F1_high_risk": 0.258
+    }
+  ],
+  "classification_report": {
+    "0": {
+      "precision": 0.9892213870372997,
+      "recall": 0.9729390431022458,
+      "f1-score": 0.9810126582278481,
+      "support": 7169.0
+    },
+    "1": {
+      "precision": 0.1950207468879668,
+      "recall": 0.3821138211382114,
+      "f1-score": 0.25824175824175827,
+      "support": 123.0
+    },
+    "accuracy": 0.9629731212287438,
+    "macro avg": {
+      "precision": 0.5921210669626332,
+      "recall": 0.6775264321202286,
+      "f1-score": 0.6196272082348032,
+      "support": 7292.0
+    },
+    "weighted avg": {
+      "precision": 0.9758249692179952,
+      "recall": 0.9629731212287438,
+      "f1-score": 0.9688211030031787,
+      "support": 7292.0
+    }
+  },
+  "cv_roc_auc_mean": 0.7460250499273263,
+  "cv_roc_auc_std": 0.023562234135637766,
+  "decision_threshold": 0.6490654945373535,
+  "validation_flag_rate": 0.02921009325287987,
+  "top_features": {
+    "NAME_INCOME_TYPE_Pensioner": 0.039744701236486435,
+    "NAME_HOUSING_TYPE_Office apartment": 0.03731182590126991,
+    "NAME_HOUSING_TYPE_With parents": 0.027214109897613525,
+    "NAME_FAMILY_STATUS_Separated": 0.026935476809740067,
+    "OCCUPATION_TYPE_Core staff": 0.02657407335937023,
+    "NAME_HOUSING_TYPE_Rented apartment": 0.02637314237654209,
+    "NAME_FAMILY_STATUS_Widow": 0.026216350495815277,
+    "OCCUPATION_TYPE_Sales staff": 0.026206636801362038,
+    "EMPLOYMENT_STABILITY": 0.025921840220689774,
+    "FLAG_WORK_PHONE": 0.024587126448750496,
+    "OCCUPATION_TYPE_Medicine staff": 0.024167541414499283,
+    "FLAG_OWN_REALTY": 0.024011172354221344
+  },
+  "n_train": 29165,
+  "n_test": 7292,
+  "positive_rate": 0.016896617933455853
+}
